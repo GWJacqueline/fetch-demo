@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Fetch/Async封装增删改查库的对比</title>
+  </head>
+  <body>
+    <script src="js/asyncDemo.js"></script>
+    <script>
+      const http = new EasyHttp();
+      // 请求数据
+      http
+        .get("data/test.json")
+        .then(data => {
+          console.log(data);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      const postdata = {
+        userId: 1,
+        name: "Lucy"
+      };
+      //传输数据
+      http
+        .post("http://jsonplaceholder.typicode.com/posts", postdata)
+        .then(data => {
+          console.log(data); //{userId: 1, name: "Lucy", id: 101}
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      //更新数据
+      http
+        .put("http://jsonplaceholder.typicode.com/posts/6", postdata)
+        .then(data => {
+          console.log(data); //{userId: 1, name: "Lucy", id: 6}
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      //删除
+      http
+        .delete("http://jsonplaceholder.typicode.com/posts/2")
+        .then(data => {
+          console.log(data); //{userId: 1, name: "Lucy", id: 6}
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    </script>
+  </body>
+</html>
